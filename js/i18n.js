@@ -97,7 +97,7 @@ window.I18N = {
     'gl.sat': 'الساتليت كيشوف منطقة كاملة (من 10 متر حتى 9 كلم)، والمحطة الأرضية كتقيس نقطة وحدة. جوج مع بعض أدق.',
     'foot.disc': 'دورة أداة مساعدة كتعتمد على معطيات ناسا. ما كتعوضش التجربة ديال الفلاح ولا المستشار الفلاحي.',
     'foot.team': 'NASA Space Apps Challenge 2026 · بني ملال',
-    'share.head': 'دورة – نصيحة الدورة الزراعية', 'share.location': 'الموقع', 'share.indicators': 'المؤشرات', 'share.water': 'الماء والري', 'share.recommendations': 'التوصيات والدورات', 'share.caveat': 'ملاحظة مهمة', 'share.forArea': 'للمساحة', 'share.available': 'المتاح', 'share.method': 'الطريقة', 'share.none': 'لا توجد مخاطر مسجلة',
+    'share.head': 'دورة - نصيحة الدورة الزراعية', 'share.location': 'الموقع', 'share.indicators': 'المؤشرات', 'share.water': 'الماء والري', 'share.recommendations': 'التوصيات والدورات', 'share.caveat': 'ملاحظة مهمة', 'share.selected': 'المحدد', 'share.forArea': 'للمساحة', 'share.available': 'المتاح', 'share.method': 'الطريقة', 'share.none': 'لا توجد مخاطر مسجلة',
     'months': ['يناير', 'فبراير', 'مارس', 'أبريل', 'ماي', 'يونيو', 'يوليوز', 'غشت', 'شتنبر', 'أكتوبر', 'نونبر', 'دجنبر']
   },
 
@@ -198,7 +198,7 @@ window.I18N = {
     'gl.sat': 'Le satellite voit une zone (10 m à 9 km), une station au sol mesure un point. Les deux ensemble sont plus précis.',
     'foot.disc': 'DAWRA est un outil d’aide basé sur les données NASA. Il ne remplace ni l’expérience de l’agriculteur ni le conseiller agricole.',
     'foot.team': 'NASA Space Apps Challenge 2026 · Béni Mellal',
-    'share.head': 'DAWRA – Conseil de rotation', 'share.location': 'Localisation', 'share.indicators': 'Indicateurs', 'share.water': 'Eau et irrigation', 'share.recommendations': 'Recommandations et rotations', 'share.caveat': 'Remarque importante', 'share.forArea': 'pour', 'share.available': 'Disponible', 'share.method': 'Méthode', 'share.none': 'Aucun risque signalé',
+    'share.head': 'DAWRA - Conseil de rotation', 'share.location': 'Localisation', 'share.indicators': 'Indicateurs', 'share.water': 'Eau et irrigation', 'share.recommendations': 'Recommandations et rotations', 'share.caveat': 'Remarque importante', 'share.selected': 'selectionne', 'share.forArea': 'pour', 'share.available': 'Disponible', 'share.method': 'Methode', 'share.none': 'Aucun risque signale',
     'months': ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc']
   },
 
@@ -299,7 +299,7 @@ window.I18N = {
     'gl.sat': 'A satellite sees an area (10 m to 9 km); a ground station measures one point. Combined, they are more accurate.',
     'foot.disc': 'DAWRA is a support tool based on NASA data. It does not replace the farmer’s experience or the agricultural advisor.',
     'foot.team': 'NASA Space Apps Challenge 2026 · Beni Mellal',
-    'share.head': 'DAWRA – Crop rotation advice', 'share.location': 'Location', 'share.indicators': 'Indicators', 'share.water': 'Water and irrigation', 'share.recommendations': 'Recommendations and rotations', 'share.caveat': 'Important note', 'share.forArea': 'for', 'share.available': 'Available', 'share.method': 'Method', 'share.none': 'No risks reported',
+    'share.head': 'DAWRA - Crop rotation advice', 'share.location': 'Location', 'share.indicators': 'Indicators', 'share.water': 'Water and irrigation', 'share.recommendations': 'Recommendations and rotations', 'share.caveat': 'Important note', 'share.selected': 'selected', 'share.forArea': 'for', 'share.available': 'Available', 'share.method': 'Method', 'share.none': 'No risks reported',
     'months': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   }
 };

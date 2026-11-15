@@ -793,41 +793,43 @@
     const indicatorLines = Object.keys(state.ind).sort((a, b) => order[state.ind[a].level] - order[state.ind[b].level]).map(k => {
       const it = state.ind[k], vars = { ...it.vars };
       if (k === 'water') vars.dir = t(vars.dir === 'drier' ? 'water.drier' : 'water.wetter');
-      return `• ${IND_ICONS[k]} ${t('ind.' + k)} — ${t('lvl.' + it.level)}: ${fmt(sentence[k], vars)} (${it.src}${it.demo ? ' · ' + t('src.demo') : ''})`;
+      return `- ${t('ind.' + k)}: ${t('lvl.' + it.level)}. ${fmt(sentence[k], vars)} (${it.src}${it.demo ? ', ' + t('src.demo') : ''})`;
     });
     const water = farm.water === 'rain'
       ? `${t('m.deficit')}: ${r.ev.deficitPct}%`
-      : `${t('m.water')}: ${nf(r.ev.needYear)} m³/${t('ha')} · ${nf(Math.round(r.ev.needYear * farm.area))} m³ ${t('share.forArea')} ${nf(farm.area)} ${t('ha')} · ${t('share.available')}: ${nf(E.availableWater(farm))} m³/${t('ha')} · ${t('share.method')}: ${farm.method}`;
+      : `${t('m.water')}: ${nf(r.ev.needYear)} m3/${t('ha')}, ${nf(Math.round(r.ev.needYear * farm.area))} m3 ${t('share.forArea')} ${nf(farm.area)} ${t('ha')}, ${t('share.available')}: ${nf(E.availableWater(farm))} m3/${t('ha')}, ${t('share.method')}: ${farm.method}`;
     const sequence = rec => {
       const labels = rec.arch === 'current' ? HIST_SEASONS : NEXT_SEASONS;
-      return rec.rot.main.map((m, i) => `${labels[i]}: ${CROPS[m].icon} ${cname(m)}${rec.rot.summer[i] !== 'none' ? ` + ☀️ ${cname(rec.rot.summer[i])}` : ''}`).join('\n');
+      return rec.rot.main.map((m, i) => `${labels[i]}: ${cname(m)}${rec.rot.summer[i] !== 'none' ? ` + ${cname(rec.rot.summer[i])}` : ''}`).join('\n');
     };
     const recLines = allRecs().map((rec, i) => {
       const explanation = E.explain(rec, activeRec().current, { cl: ctxNow().cl, zone: state.zone, farm, ind: state.ind, source: state.source }, t, fmt, state.lang);
-      return `${i === state.selected ? '▶️ ' : ''}${recLabel(rec)} · ${t('m.score')}: ${Math.round(rec.ev.total)}/100\n${sequence(rec)}\n${explanation.why.slice(0, 2).map(v => '  • ' + v).join('\n')}`;
+      return `${i === state.selected ? '[' + t('share.selected') + '] ' : ''}${rec.arch === 'current' ? t('cmp.current') : rec.arch === 'custom' ? t('build.custom') : t('arch.' + rec.arch)} - ${t('m.score')}: ${Math.round(rec.ev.total)}/100\n${sequence(rec)}\n${explanation.why.slice(0, 2).map(v => '  - ' + v).join('\n')}`;
     });
     const place = p.place ? `${p.place} · ` : '';
     const coords = p.field ? ` (${Number(p.field.lat).toFixed(4)}, ${Number(p.field.lng).toFixed(4)})` : '';
     return [
-      `🌾 ${t('share.head')}`,
+      t('share.head'),
       `${t('share.location')}: ${place}${z.name[state.lang]}${coords}`,
       '',
-      `📊 ${t('share.indicators')}`,
+      t('share.indicators') + ':',
       ...indicatorLines,
       '',
-      `💧 ${t('share.water')}`,
+      t('share.water') + ':',
       water,
       '',
-      `🔁 ${t('share.recommendations')}`,
+      t('share.recommendations') + ':',
       ...recLines,
       '',
-      `⚠️ ${t('det.risks')}`,
-      ...(x.risks.length ? x.risks.map(v => `• ${v}`) : [`• ${t('share.none')}`]),
+      t('det.risks') + ':',
+      ...(x.risks.length ? x.risks.map(v => `- ${v}`) : [`- ${t('share.none')}`]),
       '',
-      `📝 ${t('share.caveat')}`,
-      `• ${t('det.advisor')}`,
-      ...(x.gaps.length ? x.gaps.map(v => `• ${v}`) : [])
-    ].join('\n');
+      t('share.caveat') + ':',
+      `- ${t('det.advisor')}`,
+      ...(x.gaps.length ? x.gaps.map(v => `- ${v}`) : [])
+    ].join('\n')
+      .replace(/[•·—–]/g, match => match === '·' ? ', ' : match === '•' ? '-' : '-')
+      .replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/³/g, '3');
   }
 
   // glossary
