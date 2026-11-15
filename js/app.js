@@ -15,7 +15,7 @@
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
   const state = {
-    lang: localStorage.getItem('dawra.lang') || 'ar',
+    lang: localStorage.getItem('dawra.lang') || 'en',
     user: loadUser(), draft: null, wz: 0,
     zone: null, farm: null, climate: null, source: null, ind: null, rec: null, selected: 1,
     screen: 'home'
