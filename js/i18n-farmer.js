@@ -96,7 +96,7 @@
       'risk.pestHealth': 'Pesticides : uniquement des produits homologués ONSSA, masque et gants, et respect du délai avant récolte.'
     },
     en: {
-      'home.lead': 'DAWRA gets to know your farm: where the land is, soil type, whether you have a well, what you grew, whether you use fertilizers and pesticides. It combines this with 20+ years of NASA data to give advice made for you.',
+      'home.lead': 'We are honored to present DAWRA, a web application that helps local farmers choose a suitable crop-rotation plan for their land. By combining each farmer’s data with NASA’s open environmental data, DAWRA generates a detailed, practical plan that supports smarter resource management.',
       'home.start': 'Start with my farm',
       'home.h1.t': 'No sign-up', 'home.h1.d': 'No phone number or code: your answers stay on your phone.',
       'home.h2.t': 'Describe your farm', 'home.h2.d': 'Land, soil, water, crops, fertilizer: with pictures.',

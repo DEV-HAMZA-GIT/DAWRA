@@ -2,7 +2,7 @@
 
 NASA Space Apps Challenge 2026 · Beni Mellal · Challenge: *Field Shift: Adapting Farms with NASA Data*
 
-DAWRA turns 25 years of NASA Earth observations into a simple field card and compares the farmer's current crop rotation with 3 better ones, explaining **why**, the **evidence**, the **gaps** and the **risks**. Arabic/Darija (RTL), French and English.
+We are honored to present DAWRA, a web application that helps local farmers choose a suitable crop-rotation plan for their land. By combining each farmer's data with NASA's open environmental data, DAWRA generates a detailed, practical plan that supports smarter resource management. It also compares the farmer's current rotation with 3 alternatives, explaining **why**, the **evidence**, the **gaps** and the **risks**. Arabic/Darija (RTL), French and English.
 
 ## Run it
 
