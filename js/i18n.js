@@ -208,7 +208,7 @@ window.I18N = {
     'nav.advisor': 'Advisor mode',
     'step.1': 'Field', 'step.2': 'My farm', 'step.3': 'Field card', 'step.4': 'Compare', 'step.5': 'Advice',
     'home.title': 'What should I plant next season?',
-    'home.lead': 'We are honored to present DAWRA, a web application that helps local farmers choose a suitable crop-rotation plan for their land. By combining each farmer’s data with NASA’s open environmental data, DAWRA generates a detailed, practical plan that supports smarter resource management.',
+    'home.lead': 'DAWRA turns 20+ years of NASA satellite data into one simple card: it shows where your field is vulnerable and suggests 3 better crop rotations, with the reason, the evidence and the risks.',
     'home.start': 'Start now',
     'home.how': 'How it works',
     'home.h1.t': 'Pin your field', 'home.h1.d': 'Tap the map.',
