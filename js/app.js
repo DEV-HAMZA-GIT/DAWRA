@@ -76,13 +76,19 @@
     else show('onboard');
   });
 
-  // ---------- clear saved farm ----------
-  $('#logoutBtn').addEventListener('click', () => {
-    if (!confirm(t('prof.logout') + ' ?')) return;
+  // ---------- log out ----------
+  function logout() {
     localStorage.removeItem('dawra.profile');
-    Object.assign(state, { user: null, draft: null, rec: null, farm: null, climate: null });
-    document.body.classList.remove('advisor'); $('#advisorToggle').checked = false;
+    Object.assign(state, {
+      user: null, draft: null, wz: 0, zone: null, farm: null,
+      climate: null, source: null, ind: null, rec: null, selected: 1
+    });
+    document.body.classList.remove('advisor');
+    $('#advisorToggle').checked = false;
     show('home');
+  }
+  $('#logoutBtn').addEventListener('click', () => {
+    if (confirm(t('prof.logout.confirm'))) logout();
   });
 
   // ---------- wizard ----------

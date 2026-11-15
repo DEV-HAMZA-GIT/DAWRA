@@ -14,7 +14,7 @@ Then open http://localhost:8766. No dependencies or install needed. Leaflet, Cha
 
 ## Farm profile (no login)
 
-1. The site opens straight on the farm questionnaire: no name, phone number or code is asked. The DAWRA logo shows the info page. There is no account: the finished profile is saved in the farmer's own browser (localStorage), so the dashboard reopens on the next visit. **My farm → Clear my information** deletes it.
+1. The site opens straight on the farm questionnaire: no name, phone number or code is asked. The DAWRA logo shows the info page. There is no account: the finished profile is saved in the farmer's own browser (localStorage), so the dashboard reopens on the next visit. **My farm → Log out** clears the saved farm profile and returns to the start screen.
 2. **Farm profile wizard** (5 steps, every answer required before moving on):
    - Land & soil: location on the map, commune/village, area, soil type (tirs/clay, hamri/loam, sandy, stony, salty, unknown)
    - Water: well (condition, depth), dam canal, amount of water, irrigation method
@@ -31,7 +31,7 @@ Then open http://localhost:8766. No dependencies or install needed. Leaflet, Cha
 - **My farm:** profile summary, edit, re-run analysis, clear my information.
 
 ### Privacy and security
-- No accounts: no name, phone number or code is ever asked, and the server stores nothing about farmers. Each farmer's answers stay in their own browser (localStorage) until they tap **Clear my information**.
+- No accounts: no name, phone number or code is ever asked, and the server stores nothing about farmers. Each farmer's answers stay in their own browser (localStorage) until they tap **Log out**.
 - `server.js` only serves an allow-list of public files (`server.js`, `data/` and `.git/` are unreachable) and sends a CSP, X-Frame-Options and nosniff headers. It has no API and no database.
 - All user text is HTML-escaped in the interface.
 - **Before a real deployment:** serve over HTTPS (Render does this automatically).
