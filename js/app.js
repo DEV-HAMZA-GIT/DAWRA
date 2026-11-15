@@ -39,7 +39,6 @@
     document.documentElement.dir = t('dir');
     $$('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
     $$('.langs button').forEach(b => b.classList.toggle('on', b.dataset.lang === lang));
-    renderDemoChips();
     if (state.screen === 'onboard') renderWizard();
     if (state.rec) { renderDashboard(); }
     if (state.user) renderProfileView();
@@ -267,10 +266,6 @@
     map = L.map('map').setView([32.45, -6.55], innerWidth < 760 ? 8 : 9);
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 18, attribution: 'Imagery © Esri, Maxar, Earthstar Geographics' }).addTo(map);
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', { maxZoom: 18 }).addTo(map);
-    window.ZONES.forEach(z => {
-      L.circle([z.lat, z.lng], { radius: 9000, color: z.system === 'irrigated' ? '#4fc3f7' : z.system === 'rainfed' ? '#ffcc66' : '#a5d6a7', weight: 1.5, fillOpacity: 0.08 })
-        .addTo(map).bindTooltip(() => z.name[state.lang]);
-    });
     map.on('click', e => setField(e.latlng.lat, e.latlng.lng));
   }
   function distKm(a, b, c, d) {
@@ -298,17 +293,8 @@
     if (!p || !p.field) { box.innerHTML = '<span class="big-emo">📍</span><span class="muted">' + esc(t('map.none')) + '</span>'; return; }
     const z = findZone(p.field.lat, p.field.lng);
     if (map) { if (marker) marker.setLatLng([p.field.lat, p.field.lng]); else marker = L.marker([p.field.lat, p.field.lng]).addTo(map); }
-    box.innerHTML = `<span class="big-emo">🌾</span><div><b>${t('map.selected')}:</b> ${p.field.lat.toFixed(4)}, ${p.field.lng.toFixed(4)}<br><b>${t('map.zone')}:</b> ${esc(z.name[state.lang])}</div>${z.generic ? '<div class="warn">⚠️ ' + t('map.far') + '</div>' : ''}`;
+    box.innerHTML = `<span class="big-emo">🌾</span><div><b>${t('map.selected')}:</b> ${p.field.lat.toFixed(4)}, ${p.field.lng.toFixed(4)}<br><b>${t('map.region')}:</b> ${esc(z.name[state.lang])}</div>${z.generic ? '<div class="warn">⚠️ ' + t('map.far') + '</div>' : ''}`;
   }
-  function renderDemoChips() {
-    $('#demoFields').innerHTML = window.DEMO_FIELDS.map((d, i) => `<button type="button" class="chip" data-demo="${i}">${esc(d.label[state.lang])}</button>`).join('');
-  }
-  $('#demoFields').addEventListener('click', e => {
-    const b = e.target.closest('[data-demo]'); if (!b) return;
-    const d = window.DEMO_FIELDS[+b.dataset.demo];
-    if (state.draft) state.draft.field = null; // reset crops to the zone's typical rotation
-    setField(d.lat, d.lng);
-  });
   // ---------- profile → engine farm ----------
   function farmFromProfile(p) {
     const water = waterType(p);

@@ -38,7 +38,7 @@ Then open http://localhost:8766. No dependencies or install needed. Leaflet, Cha
 
 ## The 5 screens
 
-1. **Field**: tap the satellite map or pick a demo field (irrigated Tadla, rain-fed Khouribga, Dir foothills).
+1. **Field**: tap the satellite map; DAWRA automatically assigns the nearest local region for its agricultural layers.
 2. **My farm**: 4 icon questions: last 3 seasons' crops, water source & amount, livestock, priority ranking.
 3. **Field card**: 6 traffic-light indicators (heat, water stress, rain reliability, groundwater, frost, erosion), a 12-month bare-field calendar, and charts of heat days and seasonal rain.
 4. **Compare**: current rotation + 3 suggestions (best for you, water saver, soil healer, livestock or income) with water, income, soil, forage and risk scores, plus a confidence level.
@@ -52,7 +52,7 @@ Then open http://localhost:8766. No dependencies or install needed. Leaflet, Cha
 |---|---|
 | NASA POWER daily 2001–2025 (T2M_MAX, T2M_MIN, PRECTOTCORR, GWETROOT) | **Live API** for the exact point, cached in the browser |
 | Reference ET₀ | Computed from POWER with Hargreaves (FAO-56), ×0.85 semi-arid calibration |
-| SMAP, GRACE-FO, SRTM, Landsat/Sentinel-2 NDVI, ECOSTRESS, SoilGrids | Demo estimates per zone (`js/regions.js`). `scripts/extract_layers_gee.js` extracts them for real in Google Earth Engine |
+| SMAP, GRACE-FO, SRTM, Landsat/Sentinel-2 NDVI, ECOSTRESS, SoilGrids | Estimates per region (`js/regions.js`). `scripts/extract_layers_gee.js` extracts them for real in Google Earth Engine |
 
 If the NASA API cannot be reached, the app falls back to typical Tadla values and tells the user.
 
@@ -69,7 +69,7 @@ If the NASA API cannot be reached, the app falls back to typical Tadla values an
 index.html  css/style.css  manifest.json  sw.js (offline)  server.js
 js/i18n.js      translations ar / fr / en
 js/crops.js     Moroccan crop library (Kc, sensitivities, notes, risks)
-js/regions.js   Beni Mellal–Khénifra zones + demo fields
+js/regions.js   Beni Mellal–Khénifra regions and local layer estimates
 js/nasa.js      NASA POWER client + climate indicators
 js/engine.js    indicators, water balance, rotations, scoring, explanations
 js/app.js       user interface
