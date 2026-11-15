@@ -783,10 +783,52 @@
   });
   $('#shareBtn').addEventListener('click', () => {
     if (!lastExplain) return;
-    const { r, x } = lastExplain;
-    const msg = `🌾 ${t('share.head')}\n\n${r.rot.main.map((m, i) => `${NEXT_SEASONS[i]}: ${CROPS[m].icon} ${cname(m)}`).join('\n')}\n\n💡 ${x.why.slice(0, 3).join('\n• ')}\n\n🤝 ${t('det.advisor')}`;
+    const msg = buildWhatsAppMessage();
     window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank', 'noopener');
   });
+  function buildWhatsAppMessage() {
+    const { r, x } = lastExplain, p = state.user.profile, z = state.zone, { farm } = ctxNow();
+    const sentence = { heat: 'heat.s', water: 'water.s', rain: 'rain.s', ground: 'ground.s', frost: 'frost.s', erosion: 'erosion.s' };
+    const order = { red: 0, amber: 1, green: 2 };
+    const indicatorLines = Object.keys(state.ind).sort((a, b) => order[state.ind[a].level] - order[state.ind[b].level]).map(k => {
+      const it = state.ind[k], vars = { ...it.vars };
+      if (k === 'water') vars.dir = t(vars.dir === 'drier' ? 'water.drier' : 'water.wetter');
+      return `• ${IND_ICONS[k]} ${t('ind.' + k)} — ${t('lvl.' + it.level)}: ${fmt(sentence[k], vars)} (${it.src}${it.demo ? ' · ' + t('src.demo') : ''})`;
+    });
+    const water = farm.water === 'rain'
+      ? `${t('m.deficit')}: ${r.ev.deficitPct}%`
+      : `${t('m.water')}: ${nf(r.ev.needYear)} m³/${t('ha')} · ${nf(Math.round(r.ev.needYear * farm.area))} m³ ${t('share.forArea')} ${nf(farm.area)} ${t('ha')} · ${t('share.available')}: ${nf(E.availableWater(farm))} m³/${t('ha')} · ${t('share.method')}: ${farm.method}`;
+    const sequence = rec => {
+      const labels = rec.arch === 'current' ? HIST_SEASONS : NEXT_SEASONS;
+      return rec.rot.main.map((m, i) => `${labels[i]}: ${CROPS[m].icon} ${cname(m)}${rec.rot.summer[i] !== 'none' ? ` + ☀️ ${cname(rec.rot.summer[i])}` : ''}`).join('\n');
+    };
+    const recLines = allRecs().map((rec, i) => {
+      const explanation = E.explain(rec, activeRec().current, { cl: ctxNow().cl, zone: state.zone, farm, ind: state.ind, source: state.source }, t, fmt, state.lang);
+      return `${i === state.selected ? '▶️ ' : ''}${recLabel(rec)} · ${t('m.score')}: ${Math.round(rec.ev.total)}/100\n${sequence(rec)}\n${explanation.why.slice(0, 2).map(v => '  • ' + v).join('\n')}`;
+    });
+    const place = p.place ? `${p.place} · ` : '';
+    const coords = p.field ? ` (${Number(p.field.lat).toFixed(4)}, ${Number(p.field.lng).toFixed(4)})` : '';
+    return [
+      `🌾 ${t('share.head')}`,
+      `${t('share.location')}: ${place}${z.name[state.lang]}${coords}`,
+      '',
+      `📊 ${t('share.indicators')}`,
+      ...indicatorLines,
+      '',
+      `💧 ${t('share.water')}`,
+      water,
+      '',
+      `🔁 ${t('share.recommendations')}`,
+      ...recLines,
+      '',
+      `⚠️ ${t('det.risks')}`,
+      ...(x.risks.length ? x.risks.map(v => `• ${v}`) : [`• ${t('share.none')}`]),
+      '',
+      `📝 ${t('share.caveat')}`,
+      `• ${t('det.advisor')}`,
+      ...(x.gaps.length ? x.gaps.map(v => `• ${v}`) : [])
+    ].join('\n');
+  }
 
   // glossary
   document.addEventListener('click', e => {
