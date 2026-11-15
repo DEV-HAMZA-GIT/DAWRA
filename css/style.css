@@ -147,7 +147,6 @@ button.chip:hover { border-color: var(--green); }
 .cal.mini div { font-size: 10px; }
 .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; margin-top: 6px; }
 .legend i { display: inline-block; width: 14px; height: 14px; border-radius: 4px; vertical-align: middle; margin-inline-end: 4px; }
-.cal-msg { font-weight: 700; color: var(--earth); margin: 8px 0 0; }
 table.adv { width: 100%; border-collapse: collapse; font-size: 14px; }
 table.adv th, table.adv td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: start; }
 .advisor-only { display: none; }
@@ -264,12 +263,7 @@ bdi.n { direction: ltr; unicode-bidi: isolate; }
 .ind.open .chev { transform: rotate(180deg); }
 .ind .qbtn { position: static; }
 .ind .more .row { justify-content: space-between; }
-.cal .cell { cursor: pointer; transition: .15s; }
-.cal .cell:hover { transform: scale(1.06); }
-.cal .cell.sel { outline: 3px solid var(--ink); outline-offset: 1px; }
 .cal.mini .cell { cursor: default; }
-.cal.mini .cell:hover { transform: none; }
-.cal-detail { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; margin-top: 8px; font-weight: 600; }
 
 /* simulator */
 .sim summary { cursor: pointer; list-style: none; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }

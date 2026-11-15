@@ -398,17 +398,11 @@
           <div class="row"><small>🛰️ ${it.src}${it.demo ? ' · ' + t('src.demo') : ''}</small><button class="qbtn" data-gl="${it.gl}" aria-label="${t('gl.title')}">?</button></div></div>
       </div>`;
     }).join('');
-    // interactive calendar
-    state.cal = E.calendar(f.current.main[2], f.current.summer[2], state.climate, f);
-    $('#calendar').innerHTML = calHTML(state.cal, false) + `<div class="legend"><span><i style="background:var(--green-2)"></i>${t('cal.crop')}</span><span><i style="background:#d8b989"></i>${t('cal.bare')}</span><span><i style="background:var(--red)"></i>${t('cal.stress')}</span></div>`;
-    $('#calDetail').hidden = true;
-    const bare = state.cal.filter(c => c.s === 'bare').length;
-    $('#calMsg').textContent = bare >= 3 ? fmt('cal.msg', { n: bare }) : '';
     renderAdvTable();
   }
   function calHTML(cal, mini) {
     const mo = t('months'), icon = { crop: '🌱', bare: '', stress: '⚠️' };
-    return `<div class="cal${mini ? ' mini' : ''}">${cal.map((c, i) => `<div><div class="cell ${c.s}" ${mini ? '' : `data-cal="${i}" role="button" tabindex="0"`}>${mini ? '' : icon[c.s]}</div>${mo[c.m]}</div>`).join('')}</div>`;
+    return `<div class="cal${mini ? ' mini' : ''}">${cal.map(c => `<div><div class="cell ${c.s}">${mini ? '' : icon[c.s]}</div>${mo[c.m]}</div>`).join('')}</div>`;
   }
   $('#indGrid').addEventListener('click', e => {
     if (e.target.closest('[data-gl]')) return;
@@ -417,29 +411,8 @@
     $$('#indGrid .ind').forEach(c => { c.classList.remove('open'); c.setAttribute('aria-expanded', 'false'); });
     if (open) { card.classList.add('open'); card.setAttribute('aria-expanded', 'true'); }
   });
-  $('#calendar').addEventListener('click', e => {
-    const cell = e.target.closest('[data-cal]'); if (!cell) return;
-    $$('#calendar .cell').forEach(c => c.classList.remove('sel')); cell.classList.add('sel');
-    const c = state.cal[+cell.dataset.cal], m = t('months')[c.m], f = state.farm, cl = state.climate;
-    const crops = [f.current.main[2], f.current.summer[2]].filter(x => x && x !== 'none' && CROPS[x].kc[c.m] > 0);
-    const cn = crops.map(cname).join(' + ');
-    let txt;
-    if (c.s === 'bare') txt = fmt('cal.d.bare', { m });
-    else if (c.s === 'crop') txt = fmt('cal.d.crop', { m, c: cn });
-    else {
-      const why = [];
-      crops.forEach(id => {
-        const cr = CROPS[id];
-        if (cr.heatSens.includes(c.m) && cl.heatMonthRecent[c.m] >= 2) why.push(t('why.w.heat'));
-        if (cr.frostSens.includes(c.m) && cl.frostMonthProb[c.m] > 0.2) why.push(t('why.w.frost'));
-      });
-      if (!why.length) why.push(t('why.w.dry'));
-      txt = fmt('cal.d.stress', { m, c: cn, why: [...new Set(why)].join(' + ') });
-    }
-    const d = $('#calDetail'); d.textContent = (c.s === 'stress' ? '⚠️ ' : c.s === 'bare' ? '🟫 ' : '🌱 ') + txt; d.hidden = false;
-  });
   document.addEventListener('keydown', e => {
-    if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-ind],[data-cal]')) { e.preventDefault(); e.target.click(); }
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-ind]')) { e.preventDefault(); e.target.click(); }
   });
   function renderAdvTable() {
     const c = state.climate, z = state.zone, p = state.user.profile;
@@ -736,7 +709,7 @@
       <h2>👤 ${t('tab.profile')}</h2><p>📍 ${p.place ? esc(p.place) + ' · ' : ''}${esc(z.name[state.lang])}</p>${summaryHTML(p)}
       <h2>🛰️ ${t('health.title')}</h2><p class="gauge"><b>${health}/100</b> — ${t(health < 40 ? 'health.bad' : health < 70 ? 'health.mid' : 'health.good')}</p>
       <h3>${t('dl.ind')}</h3><table>${indRows}</table>
-      <h3>${t('cal.title')}</h3>${calRow}
+      <h3>${t('dl.calendar')}</h3>${calRow}
       <h2>🔁 ${t('dl.cmp')}</h2>${renderPlan().replace(/class="card plan[^"]*"/, 'class="note"')}
       <table><tr><th>${t('dl.rot')}</th><th>💧 ${t('m.water').split(' (')[0]}</th><th>💰 ${t('m.income')}</th><th>🌱 ${t('m.soil')}</th><th>🐄 ${t('m.forage')}</th><th>⚠️ ${t('m.risk')}</th><th>${t('m.score')}</th></tr>${cmpRows}</table>
       <h2>💡 ${t('dl.advice')}</h2>${advice}
