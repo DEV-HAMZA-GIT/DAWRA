@@ -76,8 +76,8 @@
     else show('onboard');
   });
 
-  // ---------- log out ----------
-  function logout() {
+  // ---------- saved account history ----------
+  function clearSavedHistory() {
     localStorage.removeItem('dawra.profile');
     Object.assign(state, {
       user: null, draft: null, wz: 0, zone: null, farm: null,
@@ -87,8 +87,11 @@
     $('#advisorToggle').checked = false;
     show('home');
   }
+  $('#clearHistoryBtn').addEventListener('click', () => {
+    if (confirm(t('prof.clearHistory.confirm'))) clearSavedHistory();
+  });
   $('#logoutBtn').addEventListener('click', () => {
-    if (confirm(t('prof.logout.confirm'))) logout();
+    if (confirm(t('prof.logout.confirm'))) clearSavedHistory();
   });
 
   // ---------- wizard ----------
