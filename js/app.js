@@ -701,23 +701,7 @@
     }
   });
 
-  // voice / print / share
-  let speaking = false;
-  $('#listenBtn').addEventListener('click', () => {
-    const synth = window.speechSynthesis, err = $('#voiceErr');
-    if (!synth || !lastExplain) return;
-    if (speaking) { synth.cancel(); speaking = false; $('#listenBtn span').textContent = t('det.listen'); return; }
-    const voice = synth.getVoices().find(v => v.lang.toLowerCase().startsWith(state.lang));
-    if (!voice) { err.textContent = t('det.novoice'); err.hidden = false; return; }
-    err.hidden = true;
-    const { r, x } = lastExplain;
-    const text = [r.rot.main.map(cname).join(', '), t('det.why'), ...x.why, t('det.risks'), ...x.risks.slice(0, 3), t('det.advisor')].join('. ').replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '');
-    const u = new SpeechSynthesisUtterance(text);
-    u.voice = voice; u.lang = voice.lang; u.rate = 0.95;
-    u.onend = () => { speaking = false; $('#listenBtn span').textContent = t('det.listen'); };
-    speaking = true; $('#listenBtn span').textContent = t('det.stop');
-    synth.speak(u);
-  });
+  // print / share
   $('#printBtn').addEventListener('click', () => window.print());
 
   // ---------- download the full plan (one self-contained HTML file, printable to PDF) ----------

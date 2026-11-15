@@ -42,7 +42,7 @@ Then open http://localhost:8766. No dependencies or install needed. Leaflet, Cha
 2. **My farm**: 4 icon questions: last 3 seasons' crops, water source & amount, livestock, priority ranking.
 3. **Field card**: 6 traffic-light indicators (heat, water stress, rain reliability, groundwater, frost, erosion), a 12-month bare-field calendar, and charts of heat days and seasonal rain.
 4. **Compare**: current rotation + 3 suggestions (best for you, water saver, soil healer, livestock or income) with water, income, soil, forage and risk scores, plus a confidence level.
-5. **Advice**: why / satellite evidence / benefits / unknowns / risks, a reminder to check with an ONCA advisor, voice read-out, print/PDF, WhatsApp share.
+5. **Advice**: why / satellite evidence / benefits / unknowns / risks, a reminder to check with an ONCA advisor, print/PDF, WhatsApp share.
 
 **Advisor mode** (top switch) shows the raw indicator table and data sources.
 
