@@ -309,11 +309,6 @@
     if (state.draft) state.draft.field = null; // reset crops to the zone's typical rotation
     setField(d.lat, d.lng);
   });
-  $('#gpsBtn').addEventListener('click', () => {
-    if (!navigator.geolocation) return;
-    navigator.geolocation.getCurrentPosition(pos => setField(pos.coords.latitude, pos.coords.longitude), () => wzError('err.field'));
-  });
-
   // ---------- profile → engine farm ----------
   function farmFromProfile(p) {
     const water = waterType(p);

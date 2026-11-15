@@ -38,7 +38,7 @@ Then open http://localhost:8766. No dependencies or install needed. Leaflet, Cha
 
 ## The 5 screens
 
-1. **Field**: tap the satellite map, use GPS, or pick a demo field (irrigated Tadla, rain-fed Khouribga, Dir foothills).
+1. **Field**: tap the satellite map or pick a demo field (irrigated Tadla, rain-fed Khouribga, Dir foothills).
 2. **My farm**: 4 icon questions: last 3 seasons' crops, water source & amount, livestock, priority ranking.
 3. **Field card**: 6 traffic-light indicators (heat, water stress, rain reliability, groundwater, frost, erosion), a 12-month bare-field calendar, and charts of heat days and seasonal rain.
 4. **Compare**: current rotation + 3 suggestions (best for you, water saver, soil healer, livestock or income) with water, income, soil, forage and risk scores, plus a confidence level.
